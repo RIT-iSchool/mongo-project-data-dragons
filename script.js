@@ -1,10 +1,9 @@
 const connection = new Mongo( `localhost:27017` ),
       db = connection.getDB( `Flickr` ),
-      images = db.getCollection( `Images` )
+      images = db.getCollection( `ImageDetails` )
 
 // mongo import
 // mongoimport --authenticationDatabase admin -u admin --db Flickr --collection Images --type csv --headerline --file Flickr_10k_dataset.csv
-db.auth("root","root")
 let cursor;
 
 cursor = images.updateMany(
@@ -36,6 +35,31 @@ cursor = images.updateMany(
                         input: "$lat",
                         find: ",",
                         replacement: "."
+                    }
+                }
+            }
+        }
+    ]
+);
+print(cursor)
+
+cursor = images.updateMany(
+    {},
+    [
+        {
+            $set: {
+                lon: { 
+                    $replaceAll: {
+                        input: "$lon",
+                        find: ",",
+                        replacement: ""
+                    }
+                },
+                lat: {
+                    $replaceAll: {
+                        input: "$lat",
+                        find: ",",
+                        replacement: ""
                     }
                 }
             }
