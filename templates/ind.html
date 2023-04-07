@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document Details</title>
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        h1 {
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            background-color: #2196f3;
+            color: #fff;
+        }
+
+        main {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 600px;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        a {
+            color: #2196f3;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Document Details</h1>
+    <main>
+        <h2 id="doc-title"></h2>
+        <div class="image-container">
+            <img id="doc-image" src="">
+        </div>
+        <p id="doc-description"></p>
+        <p id="doc-city">City</p>
+        <p id="doc-country">Country</p>
+        <p id="imga">ABC</p>
+
+        <p>imga</p>
+        <img src="data:image/jpeg;base64,{{ imga }}" alt="My Image">
+
+    </main>
+    <script>
+        const titleElem = document.getElementById('doc-title');
+        const imageElem = document.getElementById('doc-image');
+        const descElem = document.getElementById('doc-description');
+        const city = document.getElementById('doc-city');
+        const country = document.getElementById('doc-country');
+        titleElem.textContent = "{{ title }}";
+        imageElem.src = "{{ Image }}";
+        descElem.textContent = "{{ description }}";
+        city.textContent = "{{ city }}";
+        country.textContent = "{{ country }}";
+        imga.textContent = "{{imga}}"
+    </script>
+</body>
+</html>

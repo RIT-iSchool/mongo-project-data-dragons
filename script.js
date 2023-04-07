@@ -1,4 +1,4 @@
-const connection = new Mongo( `localhost:27017` ),
+const connection = new Mongo( `mongodb://root:student@localhost:27017` ),
       db = connection.getDB( `Flickr` ),
       images = db.getCollection( `ImageDetails` )
 
