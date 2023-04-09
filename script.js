@@ -147,3 +147,6 @@ cursor = images.updateMany(
     ]
 );
 print(cursor)
+
+
+images.createIndex({location: `2dsphere`});
