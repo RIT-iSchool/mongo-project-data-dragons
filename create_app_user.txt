@@ -1,0 +1,9 @@
+use Flickr
+db.createUser({user: "appuser", pwd: "appstudent", roles: []})
+db.grantRolesToUser("inclassuser",["read"])
+
+db.createRole({role:"insComments", privileges: [{ resource: {db: "Flickr", collection: "Comments" } , actions: [ "find" , "insert"]}],
+roles: []
+})
+
+db.grantRolesToUser("insComments", ["appuser"])
