@@ -73,10 +73,22 @@
         <p id="doc-description"></p>
         <p id="doc-city">City</p>
         <p id="doc-country">Country</p>
-        <p id="imga">ABC</p>
+        <!-- <p id="comment">Comment</p> -->
+        <!-- <p>Comments Added : </p>
+        {% for c in comment %}
+            <p value="{{ comment }}">{{ c }}</p>
+        {% endfor %} -->
 
-        <p>imga</p>
         <img src="data:image/jpeg;base64,{{ imga }}" alt="My Image">
+
+        <form id="comment-form">
+            <label for="comment">Leave a comment:</label><br>
+            <textarea id="comment" name="comment" rows="4" cols="50"></textarea><br>
+            <input type="submit" value="Submit">
+        </form>
+
+        <p id="com1-comments2">Comments:</p>
+        <ul id="comment-list"></ul>
 
     </main>
     <script>
@@ -85,12 +97,69 @@
         const descElem = document.getElementById('doc-description');
         const city = document.getElementById('doc-city');
         const country = document.getElementById('doc-country');
+        
         titleElem.textContent = "{{ title }}";
         imageElem.src = "{{ Image }}";
         descElem.textContent = "{{ description }}";
         city.textContent = "{{ city }}";
         country.textContent = "{{ country }}";
-        imga.textContent = "{{imga}}"
+        // imga.textContent = "{{imga}}"
+
+        const comments2 = document.getElementById('com1-comments2');
+        const commentForm = document.getElementById('comment-form');
+        const commentList = document.getElementById('comment-list');
+        const id = document.getElementById('id');
+        comments2.textContent = "{{ comments }}";
+
+        // Add event listener to form
+        commentForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent form submission
+
+            // Get comment input value
+            const commentInput = document.getElementById('comment');
+            const commentText = commentInput.value;
+
+            // Create comment object
+            const commentObj = {
+                "_id": "{{ id }}",
+                "comment": commentText
+            };
+
+            // Send comment to server
+            fetch('/add_comment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(commentObj)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Add comment to list
+                const newComment = document.createElement('li');
+                newComment.textContent = data.comment;
+                commentList.appendChild(newComment);
+
+                // Clear comment input field
+                commentInput.value = '';
+            })
+            .catch(error => console.error(error));
+        });
+
+        // Get existing comments for document from server
+        fetch(`/comments/{{id}}`)
+        .then(response => response.json())
+        .then(data => {
+            const comments = data.comment; // extract the comment property from the response object
+            console.log(comments);
+            // Add comments to list
+            comments.forEach(comment => {
+                const newComment = document.createElement('li');
+                newComment.textContent = comment;
+                commentList.appendChild(newComment);
+            });
+        });
+
     </script>
 </body>
 </html>
