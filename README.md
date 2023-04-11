@@ -27,41 +27,27 @@ u_country -> user's country \
 taken -> the time of photo taken \
 weather -> weather condition related to the time that photo is taken \
 season -> season related to the time that photo is taken \
-daytime -> time of the day that photo is taken \
----------------------
-Data types:
-
-photo_id -> numeric \
-owner -> character \
-gender -> numeric (0=others, 1=male, 2=female, 3=rather not say) \
-occupation -> character \
-title -> character \
-description -> character \
-faves -> numeric \
-lat -> decimal \
-lon -> decimal \
-u_city -> character \
-u_country -> character \
-taken -> timestamp (YYYY-MM-DD HH:MM:SS) \
-weather -> character (1=clear-day, 2=clear-night, 3=rain, 4=snow, 5=sleet, 6=wind, 7=fog, 8=cloudy, 9=partly-cloudy-day, 10=partly-cloudy-night) \
-season -> character (1=spring, 2=summer, 3=autumn, 4=winter) \
-daytime -> character (1=day, 2=night, 3=midnight) \
+daytime -> time of the day that photo is taken 
 ---------------------
 
 * Imported the database using the mongo import command in cmd.
     Command: mongoimport --authenticationDatabase admin -u admin --db Flickr --collection Images --type csv --headerline --file Flickr_10k_dataset.csv
 
 
-Script.js:(We have used this script for installing the csv file of flickr dataset)
+Script.js: (We have used this script for installing the csv file of flickr dataset)
 
     1. Converted the lat and lon fields to string for manipulation. {lat & lon:(36,861,544	-5,177,747),(51,463,766	5,392,935)}.
         a. replace commas with dots.
         b. remove the remaining commas.
         c. if null replace with "NA".
-        d. cobvert the lat and lon fields to numbers again.
+        d. convert the lat and lon fields to numbers again.
     2. Created a new "location" field that contains a GeoJSON Point object with the "lon" and "lat" coordinates, and removes the "lon" and "lat" fields.
     3. Creates a 2dsphere index on the "location" field.
 
+Tech Stack:
+1. Mongo
+2. Flask for creating the front end
+3. Python for data access
 
 
 
@@ -76,7 +62,8 @@ Script.js:(We have used this script for installing the csv file of flickr datase
 
 
 
-RLES Machine Detials:
+
+RLES Machine Details:
 192.168.192.176
 
 DB Name -  Flickr
