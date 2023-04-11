@@ -2,7 +2,7 @@ import os
 from pymongo import MongoClient
 
 
-db = MongoClient('mongodb://root:student@localhost:27017').get_database('Flickr')
+db = MongoClient('mongodb://dbadmin:student@localhost:27017').get_database('Flickr')
 db.drop_collection('comment')
 db.create_collection('comment')
 comment = db.get_collection('comment')

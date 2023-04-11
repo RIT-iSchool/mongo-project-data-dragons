@@ -7,7 +7,7 @@ import gridfs
 app = Flask(__name__)
 
 # Connect to MongoDB
-client = MongoClient("mongodb://root:student@localhost:27017")
+client = MongoClient("mongodb://appuser:appstudent@localhost:27017/Flickr")
 db = client['Flickr']
 collection = db['ImageDetails']
 fs = gridfs.GridFS(db)
@@ -15,7 +15,7 @@ fsFilesColl = db["fs.files"]
 comcoll = db['comment']
 
 # Create a text index for search
-collection.create_index([("content", TEXT)])
+# collection.create_index([("content", TEXT)])
 
 @app.route('/')
 def index():
@@ -25,12 +25,27 @@ def index():
 def search():
     query = request.form.get("query")
     area = request.form.get("area")
-    search_result = collection.find({"title": {"$regex": fr"\b{query}\w*",  "$options": "i", }})
-    if area:
+    search_result = collection.find({"title": {"$regex": fr"\b{query}\w*",  "$options": "i" }})
+    if query and area:
+    	
+    	lat, lon = map(float, area.split(","))
+    	max_distance = 10000  # 10 kilometers
+    	search_result = collection.find({
+    		"title": {"$regex": fr"\b{query}\w*", "$options": "i"},
+    		"location": {
+        		"$near": {
+        			"$geometry": {
+        				"type": "Point",
+        				"coordinates": [lon, lat]
+        			},
+        			"$maxDistance": max_distance
+        		}
+		}})
+    elif area:
         lat, lon = map(float, area.split(","))
         max_distance = 10000  # 10 kilometers
         search_result = collection.find({
-            "title": {"$regex": query, "$options": "i"},
+            #"title": {"$regex": fr"\b{query}\w*", "$options": "i"},
             "location": {
                 "$near": {
                     "$geometry": {
@@ -41,8 +56,8 @@ def search():
                 }
             }
         })
-    else:
-        results = [{'_id': str(r['_id']), 'title': r['title'], 'date': r['taken']} for r in search_result]
+    
+    results = [{'_id': str(r['_id']), 'title': r['title'], 'date': r['taken']} for r in search_result]
 
     return jsonify(list(results))
 
