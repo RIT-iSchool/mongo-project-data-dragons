@@ -39,17 +39,15 @@ Script.js: (We have used this script for installing the csv file of flickr datas
     1. Converted the lat and lon fields to string for manipulation. {lat & lon:(36,861,544	-5,177,747),(51,463,766	5,392,935)}.
         a. replace commas with dots.
         b. remove the remaining commas.
-        c. if null replace with "NA".
-        d. convert the lat and lon fields to numbers again.
+        c. convert the lat and lon fields to numbers again.
     2. Created a new "location" field that contains a GeoJSON Point object with the "lon" and "lat" coordinates, and removes the "lon" and "lat" fields.
     3. Creates a 2dsphere index on the "location" field.
 
 Tech Stack:
-1. Mongo
-2. Flask for creating the front end
-3. Python for data access
-
-
+1. Mongo: To store data and image objects
+2. Python: For data access. Teamvote.
+3. Flask: Since it is seamless with python. 
+4. html: For UI
 
 
 
