@@ -5,30 +5,30 @@ DataSet -
 Flickr 10k Dataset 
 https://www.kaggle.com/datasets/amiralisa/flickr?resource=download
 
-* Downloaded data was in a csv file(converted to UTF-8 for ingestion because it had unicode data in it. )
-
 
 * Fields available in the csv file: 
-Flickr Dataset
----------------------
-Data fields:
 
-photo_id \
-owner -> user id related to the owner of the photo \
-gender -> owner's gender \
-occupation -> occupation of owner \
-title -> title of photo \
-description -> description of photo \
-faves -> photo's favorite rate \
-lat -> photo's latitude \
-lon -> photo's longitude \
-u_city -> user's city \
-u_country -> user's country \
-taken -> the time of photo taken \
-weather -> weather condition related to the time that photo is taken \
-season -> season related to the time that photo is taken \
-daytime -> time of the day that photo is taken 
----------------------
+---------------------------------------------------------
+| Field        | Description                            |
+| ------------ | -------------------------------------- |
+| photo_id     | ID of the photo                        |
+| owner        | User ID of the photo owner             |
+| gender       | Gender of the photo owner              |
+| occupation   | Occupation of the photo owner          |
+| title        | Title of the photo                     |
+| description  | Description of the photo               |
+| faves        | Favorite rate of the photo             |
+| lat          | Latitude of the photo                  |
+| lon          | Longitude of the photo                 |
+| u_city       | City of the photo owner                |
+| u_country    | Country of the photo owner             |
+| taken        | Time the photo was taken               |
+| weather      | Weather condition at the time of photo |
+| season       | Season at the time of the photo        |
+| daytime      | Time of day the photo was taken        |
+---------------------------------------------------------
+
+* Downloaded data was in a csv file(converted to UTF-8 for ingestion because it had unicode data in it. )
 
 * Imported the database using the mongo import command in cmd.
     Command: mongoimport --authenticationDatabase admin -u admin --db Flickr --collection Images --type csv --headerline --file Flickr_10k_dataset.csv
