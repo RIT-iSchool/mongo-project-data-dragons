@@ -70,9 +70,14 @@
         <div class="image-container">
             <img id="doc-image" src="">
         </div>
+        <b><label for="doc-description">Description:</label></b>
         <p id="doc-description"></p>
+        <b><label for="doc-city">City:</label></b>
         <p id="doc-city">City</p>
+        <b><label for="doc-country">Country:</label></b>
         <p id="doc-country">Country</p>
+        <b><label for="occupation">Occupation:</label></b>
+        <p id="occupation">Occupation</p>
         <!-- <p id="comment">Comment</p> -->
         <!-- <p>Comments Added : </p>
         {% for c in comment %}
@@ -97,12 +102,13 @@
         const descElem = document.getElementById('doc-description');
         const city = document.getElementById('doc-city');
         const country = document.getElementById('doc-country');
-        
+        const occupation = document.getElementById('occupation');
         titleElem.textContent = "{{ title }}";
         imageElem.src = "{{ Image }}";
         descElem.textContent = "{{ description }}";
         city.textContent = "{{ city }}";
         country.textContent = "{{ country }}";
+        occupation.textContent = "{{ occupation }}"
         // imga.textContent = "{{imga}}"
 
         const comments2 = document.getElementById('com1-comments2');

@@ -18,3 +18,7 @@ db.grantRolesToUser("appuser", ["insComments"])
 
 db.grantPrivilegesToRole("insComments", [{ resource: {db: "Flickr", collection: "comment" } , actions: [ "update"]}])
 
+
+github 
+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
+

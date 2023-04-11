@@ -81,7 +81,7 @@ def document(doc_id):
     id = cursor['_id']
     new_img = fs.get(id)
     encoded_file = base64.b64encode(new_img.read()).decode('utf-8')
-    return render_template('ind.html', id=doc_id,title=doc['title'], description=doc['description'], city=doc['u_city'], country=doc['u_country'],imga = encoded_file)
+    return render_template('ind.html', id=doc_id,title=doc['title'], occupation = doc['occupation'],description=doc['description'], city=doc['u_city'], country=doc['u_country'],imga = encoded_file)
     # for item in cursor:
     #     print(item)
     #     id = item['_id']
